@@ -1,0 +1,50 @@
+#tabuleiro{
+    width:500px;
+    height:500px;
+    /*border:solid 1px;*/
+    margin: 0 auto;
+}
+ 
+.linha{ 
+    height:50px;
+}
+ 
+.casa{
+    width:50px;
+    height:100%;    
+    float:left;
+    cursor: pointer;
+    border: solid 1px;
+    border-color: #000;
+    background-size: cover;
+}
+
+.poco { 
+    background-image: url(https://image.flaticon.com/icons/svg/595/595608.svg);
+	background-color: #4682B4;
+}
+
+.wumpus {
+    background-image: url('../img/teste.png');
+    /*background-image: url(http://icons.iconarchive.com/icons/martin-berube/character/256/Monster-icon.png);*/
+    background-color: green;
+    display:block;
+    background-repeat: no-repeat;
+}
+
+.ouro {
+    background-image: url(https://image.flaticon.com/icons/svg/1999/1999286.svg);
+	background-color: #ffd700;
+}
+
+.heroi {
+	background-color: red;
+}
+
+.brisa {
+	background-color: #ADD8E6;
+}
+
+.odor {
+	background-color: #90EE90;	
+}

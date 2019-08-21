@@ -1,0 +1,27 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/wumpus.css" type="text/css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body class="container">
+	<div class="instructions">
+		<ol>
+			<li id="inst_1">Colocar 3 Poços</li>
+			<li id="inst_2">Colocar Wumpus</li>
+			<li id="inst_3">Colocar Ouro</li>
+		</ol>
+	</div>
+	
+	<div class="container row">
+		<div id="tabuleiro" class="col-lg-6 col-md-12"></div>
+		
+		<div id="info" class="col-lg-6 col-md-12">
+			<h3>Perigos Confirmados:</h3>
+			<ul id="perigoConfirmado"></ul>
+		</div>
+	</div>
+	<button id="play" class="btn btn-success">Iniciar</button>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="js/wumpus.js"></script>
+</body>
+</html>
