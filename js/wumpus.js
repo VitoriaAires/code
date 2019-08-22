@@ -1,20 +1,20 @@
 $(document).ready(function() {
 
 	var casa_selecionada = null;
-		let clicks = 0;
-		let tabuleiro = new Array();
-		let perigos = new Array();
-		let passoDados = new Array();
-		let passos_possiveis = new Array();
-		let not_death = new Array();
-		let posicao = '0_0';
-		let ultimaPosicao;
-		let status = 'vivo';
-		let alerta = new Map(); 
-		let timer;
-
-		let certeza_perigos  = new Array();
+	let clicks = 0;
+	let tabuleiro = new Array();
+	let possible_death = new Array();
+	let passoDados = new Array();
+	let passos_possiveis = new Array();
+	let not_death = new Array();
+	let posicao = '0_0';
+	let ultimaPosicao;
+	let status = 'vivo';
+	let alerta = new Map(); 
+	let timer;
+	let certeza_perigos  = new Array();
 	
+	// --------------- Montar Tabuleiro e add Monstro e Poços -----------------
 	function montarTabuleiro(){
 		var i;
 		for (i=0; i<8; i++){
@@ -87,7 +87,8 @@ $(document).ready(function() {
 		if (clicks == 5)
 			$('#inst_3').css('text-decoration', 'line-through');
 		}
-	})
+	});
+	// --------------- Fim -----------------
 
 	function win()
 	{
@@ -125,9 +126,9 @@ $(document).ready(function() {
 	let posicao_removida;
 	function remove_perigo(posicao)
 	{
-		index = perigos.indexOf(posicao);
+		index = possible_death.indexOf(posicao);
 		if (index > -1) {
-			perigos.splice(index, 1);
+			possible_death.splice(index, 1);
 
 			posicao_removida = posicao;
 
@@ -135,11 +136,11 @@ $(document).ready(function() {
 		}		
 	}
 
-	function remover_perigo_map(value, key, map){
+	function remover_perigo_map(value, key){
 		
 		index = value.indexOf(posicao_removida);
 
-		// Remove perigo da lista (alerta, Array perigos)
+		// Remove perigo da lista (alerta, Array possible_death)
 		// alerta - brisas  
 		if(index != -1 ){
 			console.log(" posição removida " + posicao_removida);
@@ -154,6 +155,9 @@ $(document).ready(function() {
 		}
 	}
 
+	// Como a posição atual não tem um perigo (brisa ou odor) 
+	// é possivel indentificar que as casas em volta desta posição são seguras
+	// Portanto: add posição no array not_death e removemos o perigo 
 	function store_seguros(posicao)
 	{
 
@@ -200,6 +204,7 @@ $(document).ready(function() {
     	return count;
 	}
 
+	// Indentifica quais as possiveis posições para o proximo passo e adiciona os possiveis Poços e Monstro  
 	function get_perigos(posicao){ 
 
 		p = posicao.split("_");
@@ -208,22 +213,12 @@ $(document).ready(function() {
 		var value;
 		var temp = new Array();
 
-		/*if (p[0] + 1 <= 7){
-			value = (p[0] + 1) + "_" + p[1];
-			// adicionar perigo só se não for uma possição ja conhecida ou se não tenha no perigos
-			if(not_death.indexOf(value) == -1 /*&& perigos.indexOf(value) == -1){  
-				perigos.push(value);
-				temp.push(value);
-				
-			}
-		}*/
-
 		if (p[0] + 1 <= 7){
 			value = (p[0] + 1) + "_" + p[1];
 			if(not_death.indexOf(value) == -1){
 				temp.push(value);
-				if(perigos.indexOf(value) == -1){
-					perigos.push(value);
+				if(possible_death.indexOf(value) == -1){
+					possible_death.push(value);
 				}
 			}
 		}
@@ -232,8 +227,8 @@ $(document).ready(function() {
 			value = (p[0] - 1) + "_" + p[1];
 			if(not_death.indexOf(value) == -1){
 				temp.push(value);
-				if(perigos.indexOf(value) == -1){
-					perigos.push(value);
+				if(possible_death.indexOf(value) == -1){
+					possible_death.push(value);
 				}
 			}
 		}
@@ -242,8 +237,8 @@ $(document).ready(function() {
 			value = p[0] + "_" + (p[1] + 1);
 			if(not_death.indexOf(value) == -1){
 				temp.push(value);
-				if(perigos.indexOf(value) == -1){
-					perigos.push(value);
+				if(possible_death.indexOf(value) == -1){
+					possible_death.push(value);
 				}
 			}
 		}
@@ -252,8 +247,8 @@ $(document).ready(function() {
 			value = p[0] + "_" + (p[1] - 1);
 			if(not_death.indexOf(value) == -1){
 				temp.push(value);
-				if(perigos.indexOf(value) == -1){
-					perigos.push(value);
+				if(possible_death.indexOf(value) == -1){
+					possible_death.push(value);
 				}
 			}
 		}
@@ -278,7 +273,7 @@ $(document).ready(function() {
 		$.each(passos_possiveis, function(index, p) {
 
 			score[p] = 0;
-			if (perigos.indexOf(p) == -1) {
+			if (possible_death.indexOf(p) == -1) {
 				if (not_death.indexOf(p) != -1) {
 					score[p] = score[p] + 1;
 				}
@@ -320,7 +315,7 @@ $(document).ready(function() {
 		not_death.length = 0;
 		passoDados.length = 0;
 		passos_possiveis.length = 0;
-		perigos.length = 0;
+		possible_death.length = 0;
 
         passoDados.push(posicao);
         
@@ -329,21 +324,25 @@ $(document).ready(function() {
 
 	$('#play').on('click', function(){
 		play();
-	})
+	});
 
 	function calcula(){
+
+		// se posição atual tem um perigo (brisa ou odor) 
 		if($('#' + posicao).val() == 'perigo') {
 			if(not_death.indexOf(posicao) != -1 && certeza_perigos.length != 4) {
 				get_perigos(posicao);	
-			}else if(certeza_perigos.length == 4 && perigos.length != 4){
-				$.each(perigos, function(index, p) {
+			}else if(certeza_perigos.length == 4 && possible_death.length != 4){
+				$.each(possible_death, function(index, p) {
 					if(certeza_perigos.indexOf(p) == -1){
 						remove_perigo(p);
 					}
 				});
-				console.log("Perigo : " + perigos);
+				console.log("Perigo : " + possible_death);
 			}
-		} else {
+		} 
+		else 
+		{
 			store_seguros(posicao);
 		}
 		get_possiveis(posicao);

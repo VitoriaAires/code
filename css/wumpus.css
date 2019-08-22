@@ -25,7 +25,7 @@
 }
 
 .wumpus {
-    background-image: url('../img/teste.png');
+    background-image: url('../img/monstro.png');
     /*background-image: url(http://icons.iconarchive.com/icons/martin-berube/character/256/Monster-icon.png);*/
     background-color: green;
     display:block;
