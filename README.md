@@ -12,7 +12,7 @@ O trabalho proposto em aula consiste na construção de um agente inteligente ca
 - Uma pilha de ouro
 - Três poços
 
-O agente inicia na posição (0,0) e pode se deslocar pelo tabuleiro (restrito a movimentos laterais e verticais apenas), os demais itens são posicionados pelo usuário e mantêm posição fixa.
+O agente inicia na posição (0,0) e pode se deslocar pelo tabuleiro (restrito a movimentos laterais e verticais apenas), os demais itens são posicionados pelo usuário e mantêm posições fixas.
 
 #### Sensor do Ambiente
 - Posição com Wumpus - nas casas adjacentes (não diagonais) o agente sentirá um mau cheiro (odor).
