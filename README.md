@@ -2,7 +2,7 @@
 
 *Trabalho de IA 2019*
 
-O trabalho proposto em aula consiste na construção de uma agente inteligente capaz de se mover pelo tabuleiro, encontrar o Ouro e evitando cair em um poço ou se deparar com o monstro. 
+O trabalho proposto em aula consiste na construção de um agente inteligente capaz de se mover pelo tabuleiro, encontrar o Ouro e evitando cair em um poço ou se deparar com o monstro. 
 
 #### Configurações gerais:
 
