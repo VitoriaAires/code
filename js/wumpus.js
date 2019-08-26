@@ -2,26 +2,26 @@ $(document).ready(function() {
 
 	var casa_selecionada = null;
 	let clicks = 0;
-    let tabuleiro = new Array();
-    let possivel_morte = new Array();
-    let certeza_morte = new Array(); 
-    let passos_possiveis = new Array();
-    let passo_dados = new Array();
-    let posicao_segura = new Array(); 
-    let posicao = '0_0';
+	let tabuleiro = new Array();
+	let possivel_morte = new Array();
+	let certeza_morte = new Array(); 
+	let passos_possiveis = new Array();
+	let passo_dados = new Array();
+	let posicao_segura = new Array(); 
+	let posicao = '0_0';
 	let ultimaPosicao;
 	let status = 'vivo';
 	let alerta = new Map();
 	let timer;
-	
-	
+
+
 	// --------------- Montar Tabuleiro e add Monstro e Poços -----------------
 	function montarTabuleiro(){
 		var i;
 		for (i=0; i<8; i++){
 			$("#tabuleiro").append("<div id='linha_"+i.toString()+"' class='linha' >");
 			tabuleiro[i] = new Array(8);       
-	
+
 			for (j=0; j<8; j++){
 				var nome_casa =+i.toString()+"_"+j.toString();
 				$("#linha_"+i.toString()).append("<div id='"+nome_casa+"' class='casa' />");
@@ -31,7 +31,7 @@ $(document).ready(function() {
 		}
 		$("#0_0").addClass('heroi');
 	}
-	
+
 	montarTabuleiro();
 
 	function addSensor(p, classe){
@@ -183,7 +183,7 @@ $(document).ready(function() {
 		}		
 	}
 
-    // Indentifica os passos possiveis 
+	// Indentifica os passos possiveis 
 	function setPassosPossiveis(posicao) {
 		p = posicao.split("_");
 		p[0] = parseInt(p[0]);
@@ -200,9 +200,9 @@ $(document).ready(function() {
 	}
 
 	function getOccurrence(array, value) {
-    	var count = 0;
-    	array.forEach((v) => (v === value && count++));
-    	return count;
+		var count = 0;
+		array.forEach((v) => (v === value && count++));
+		return count;
 	}
 
 	// Indentifica quais são os possiveis Poços e Monstro  
@@ -263,7 +263,7 @@ $(document).ready(function() {
 			certeza_morte.push(temp[0]);
 			$("#perigoConfirmado").append("<li>"+temp[0]+"</li>");				
 		}
-	
+
 	}
 
 	function andar(posicao)
@@ -304,8 +304,8 @@ $(document).ready(function() {
 		addHeroi(posicao);
 		passo_dados.push(nova_posicao);
 		
-        passos_possiveis.length = 0; //esvazia os passos possiveis
-        
+		passos_possiveis.length = 0; //esvazia os passos possiveis
+		
 		return nova_posicao;
 	}
 
@@ -318,8 +318,8 @@ $(document).ready(function() {
 		passos_possiveis.length = 0;
 		possivel_morte.length = 0;
 
-        passo_dados.push(posicao);
-        
+		passo_dados.push(posicao);
+		
 		timer = setInterval(calcula, 250);	
 	}
 

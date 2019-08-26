@@ -1,3 +1,3 @@
-Wumpus World!
+ # Wumpus World!
 
-Trabalho de IA 2019
+*Trabalho de IA 2019*
