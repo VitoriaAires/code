@@ -4,7 +4,7 @@
 
 O trabalho proposto em aula consiste na construção de um agente inteligente capaz de se mover pelo tabuleiro, encontrar o Ouro e evitando cair em um poço ou se deparar com o monstro. 
 
-#### Configurações gerais:
+#### Detalhes do Jogo:
 
 - Tabuleiro 8x8
 - Um agente
@@ -13,6 +13,8 @@ O trabalho proposto em aula consiste na construção de um agente inteligente ca
 - Três poços
 
 O agente inicia na posição (0,0) e pode se deslocar pelo tabuleiro (restrito a movimentos laterais e verticais apenas), os demais itens são posicionados pelo usuário e mantêm posições fixas.
+
+O agente morre se estiver na mesma posição que o wumpus ou poço.
 
 #### Sensor do Ambiente
 - Posição com Wumpus - nas casas adjacentes (não diagonais) o agente sentirá um mau cheiro (odor).
